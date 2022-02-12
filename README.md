@@ -1,4 +1,4 @@
-# Spartial-Forest-Data-Cleaning-
+# Spartial-Forest-Data-Cleaning
 
 
 Introduction
