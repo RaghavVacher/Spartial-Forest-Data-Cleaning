@@ -21,16 +21,16 @@ longs <- sort(long)
 latis <- sort(lati)
 
 #extracting the 7 variables in the data set on the bases of: longitude, latitude, time
-tp <- ncvar_get(nc, "tp", start = c(1 ,1, 1), count = c(-1 , -1, -1))
-e <- ncvar_get(nc, "e", start = c(1 ,1 , 1), count = c(-1 , -1, -1))
-skt <- ncvar_get(nc, "skt", start = c(1 ,1 , 1), count = c(-1 , -1, -1))
-lai_hv <- ncvar_get(nc, "lai_hv", start = c(1 ,1 , 1), count = c(-1 , -1, -1))
-lavi_lv <- ncvar_get(nc, "lai_lv", start = c(1 ,1 , 1), count = c(-1 , -1, -1))
-d2m <- ncvar_get(nc, "d2m", start = c(1 ,1 , 1), count = c(-1 , -1, -1))
-src <- ncvar_get(nc, "src", start = c(1 ,1 , 1), count = c(-1 , -1, -1))
+tp <- ncvar_get(nc, "tp", start = c(1 ,1, 1), count = c(-1 , -1, 1))
+e <- ncvar_get(nc, "e", start = c(1 ,1 , 1), count = c(-1 , -1, 1))
+skt <- ncvar_get(nc, "skt", start = c(1 ,1 , 1), count = c(-1 , -1, 1))
+lai_hv <- ncvar_get(nc, "lai_hv", start = c(1 ,1 , 1), count = c(-1 , -1, 1))
+lavi_lv <- ncvar_get(nc, "lai_lv", start = c(1 ,1 , 1), count = c(-1 , -1, 1))
+d2m <- ncvar_get(nc, "d2m", start = c(1 ,1 , 1), count = c(-1 , -1, 1))
+src <- ncvar_get(nc, "src", start = c(1 ,1 , 1), count = c(-1 , -1, 1))
 
 #Combining Longitude and Latitude
-lonlat <- as.matrix(expand.grid(long,lati, time))
+lonlat <- as.matrix(expand.grid(long,lati))
 dim(lonlat)
 
 #Extracting variable values to convert into a data set
@@ -40,10 +40,7 @@ values<- sapply(X = count, FUN = as.vector)
 
 #Creating Complied Data set
 dF <- data.frame(cbind(lonlat,values))
-names(dF) <- c("Longitude","Latitude", "time", "tp", "e", "skt", "lai_hv", "lavi_lv", "d2m", "src")
+names(dF) <- c("Longitude","Latitude", "tp", "e", "skt", "lai_hv", "lavi_lv", "d2m", "src")
 dF <- na.omit(dF)
-
-#Extracting Unique Values
-dFa <- distinct(dF, Longitude, Latitude, .keep_all= TRUE) 
 
 
